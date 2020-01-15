@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Button";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Button Features:</h2>
+<br/>
+<li> Default Button</li>
+<li> DropDown Button</li>
+<li> Radio Button</li>
+<li> Check Box</li>
+<li> Split Button</li>
+<li> Group Button</li>
+<li> Switch Button</li>
+<li> Progress Button</li>
+<li> Theme - Bootstrap-Theme</li>
+<br/>
+<div id = "ControlRegion">
+              <h2>Default Button</h2>
+             <ejs-button id="btn" content="Normal"></ejs-button>
+            <br>
+              <h2>DropDown Button</h2>
+            <ejs-dropdownbutton id="dropdownbtn" content="Copy" items="ViewBag.items"></ejs-dropdownbutton>
+            <br />
+              <h2>Radio Button</h2>
+            <ejs-radiobutton id="radiobtn1" name="sex" checked="true" label="Male"></ejs-radiobutton>
+    <ejs-radiobutton id="radiobtn2" name="sex" label="Female"></ejs-radiobutton>
+            <br />
+              <h2>Check Box</h2>
+            <ejs-checkbox id="checkcox" label="CheckBox" checked="true"></ejs-checkbox>
+            <br />
+              <h2>Split Button</h2>
+            <ejs-splitbutton id="splitbtn" content="Paste" items="ViewBag.items"></ejs-splitbutton>
+              <h2>Button Group</h2>
+            <div id="btn-group" class="e-btn-group">
+        <ejs-button id='left' content="Left"></ejs-button>
+        <ejs-button id='center' content="Center"></ejs-button>
+        <ejs-button id='right' content="Right"></ejs-button>
+    </div>
+			<br />
+              <h2>Switch Button</h2>
+            <div style="display:flex; align-items:center;">
+    <label id="switch-label" for="switch" style="display:inline-block; padding: 10px 20px 10px 0;">USB Tethering</label>
+    <ejs-switch id="switch" checked="true"></ejs-switch>
+</div>
+<style>
+    #switch-label {
+        font-family: "Roboto", "Segoe UI", "GeezaPro", "DejaVu Serif", "sans-serif";
+        font-size: 13px;
+        cursor: pointer;
+        user-select: none;
+    }
+</style>
+			<br />
+			<h2>Progress Button</h2>
+<div>
+    <ejs-progressbutton id="progress-btn" content="Progress" enableProgress="true"></ejs-progressbutton>
+</div>
+<br />
+    <style>
+        .frame {
+            width: 30%;
+        }
+        td {
+            padding: 10px;
+        }
+        .spltspan{
+            width:50px;
+        }
+    </style>
+</div>

@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "DashboardLayout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>DashboardLayout Features:</h2>
+<br/>
+<li> DashboardLayout Samples - Default</li>
+<li> Theme - Bootstrap-Theme</li>
+<br/>
+			<div>
+    <ejs-dashboardlayout id="defaultLayout" columns="6">
+        <e-content-template>
+            <div id="one" class="e-panel" data-row="0" data-col="0" data-sizeX="1" data-sizeY="1">
+                <span id="close" class="e-template-icon e-clear-icon"></span>
+                <div class="e-panel-container">
+                    <div class="text-align">0</div>
+                </div>
+            </div>
+            <div id="two" class="e-panel" data-row="1" data-col="0" data-sizeX="1" data-sizeY="2">
+                <span id="close" class="e-template-icon e-clear-icon"></span>
+                <div class="e-panel-container">
+                    <div class="text-align">1</div>
+                </div>
+            </div>
+            <div id="three" class="e-panel" data-row="0" data-col="1" data-sizeX="2" data-sizeY="2">
+                <span id="close" class="e-template-icon e-clear-icon"></span>
+                <div class="e-panel-container">
+                    <div class="text-align">2</div>
+                </div>
+            </div>
+            <div id="four" class="e-panel" data-row="2" data-col="1" data-sizeX="1" data-sizeY="1">
+                <span id="close" class="e-template-icon e-clear-icon"></span>
+                <div class="e-panel-container">
+                    <div class="text-align">3</div>
+                </div>
+            </div>
+            <div id="five" class="e-panel" data-row="2" data-col="2" data-sizeX="2" data-sizeY="1">
+                <span id="close" class="e-template-icon e-clear-icon"></span>
+                <div class="e-panel-container">
+                    <div class="text-align">4</div>
+                </div>
+            </div>
+            <div id="six" class="e-panel" data-row="0" data-col="3" data-sizeX="1" data-sizeY="1">
+                <span id="close" class="e-template-icon e-clear-icon"></span>
+                <div class="e-panel-container">
+                    <div class="text-align">5</div>
+                </div>
+            </div>
+            <div id="seven" class="e-panel" data-row="1" data-col="3" data-sizeX="1" data-sizeY="1">
+                <span id="close" class="e-template-icon e-clear-icon"></span>
+                <div class="e-panel-container">
+                    <div class="text-align">6</div>
+                </div>
+            </div>
+            <div id="eight" class="e-panel" data-row="0" data-col="4" data-sizeX="1" data-sizeY="3">
+                <span id="close" class="e-template-icon e-clear-icon"></span>
+                <div class="e-panel-container">
+                    <div class="text-align">7</div>
+                </div>
+            </div>
+        </e-content-template>
+    </ejs-dashboardlayout>
+</div>
+<style>
+    #defaultLayout .e-panel .e-panel-container {
+        vertical-align: middle;
+        font-weight: 600;
+        font-size: 20px;
+        text-align: center;
+    }
+    .text-align {
+        line-height: 200px;
+    }
+    .default {
+        margin-top: 10px;
+        padding: 10px;
+    }
+</style>

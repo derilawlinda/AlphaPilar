@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Data Grid";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script id='dialogtemplate' type="text/x-template">
+    <div id="dialogTemp">
+    </div>
+</script>
+
+<script id="URLtemplate" type="text/x-template">
+    <a rel='nofollow' target="_blank" href="/uploads/${URL}">
+        ${URL}
+    </a>
+</script>
+
+
+<body>
+    <div>
+        <h1 class="page-title"> File Manager </h1>
+    </div>
+    <div>
+        <div class="col-md-12 margin-top col-lg-12">
+            <ejs-grid id="grid" dataSource="ViewBag.datasource" actionComplete="actionComplete" actionBegin="actionBegin" allowExcelExport="true" allowFiltering="true" allowSorting="true" height="300px" allowGrouping="true" allowPaging="true" toolbar="@(new List<string>() {  "Add" })">
+                <e-grid-groupsettings columns="@(new string[] {"Section"})"></e-grid-groupsettings>
+
+                <e-grid-editSettings allowAdding="true" mode="Dialog" template='#dialogtemplate'></e-grid-editSettings>
+                <e-grid-filterSettings type="Menu"></e-grid-filterSettings>
+                <e-grid-pagesettings pageCount="5"></e-grid-pagesettings>
+                <e-grid-columns>
+                    <e-grid-column field="Id" headerText="ID" isPrimaryKey="true" type="number" width="75"></e-grid-column>
+                    <e-grid-column field="Section" type="string" headerText="Section" width="150"></e-grid-column>
+                    <e-grid-column field="Procedure" type="string" headerText="Procedure" width="150"></e-grid-column>
+                    <e-grid-column field="Form" type="string" headerText="Number" width="150"></e-grid-column>
+                    <e-grid-column field="Title" type="string" headerText="Title" width="150"></e-grid-column>
+                    <e-grid-column field="Element" type="string" headerText="Element" width="150"></e-grid-column>
+                    <e-grid-column field="URL" type="string" headerText="URL" width="150" template="#URLtemplate"></e-grid-column>
+                    <e-grid-column field="EksternalUrl" type="string" headerText="EksternalUrl" width="150"></e-grid-column>
+                    <e-grid-column field="Work" type="string" headerText="Work" width="150"></e-grid-column>
+                </e-grid-columns>
+
+            </ejs-grid>
+
+            <ejs-scripts></ejs-scripts>
+        </div>
+    </div>
+</body>

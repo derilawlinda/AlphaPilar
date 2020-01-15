@@ -1,0 +1,15 @@
+﻿@using AlphaPilar.Controllers
+@{
+    ViewBag.Title = "MaskedTextBox";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>MaskedTextBox Features:</h2>
+<br/>
+<li> MaskedTextBox Samples - Default</li>
+<li> Theme - Bootstrap-Theme</li>
+<br/>
+              <div style="width: 450px; margin: 0 auto">    
+    </div>
+    <div style="width: 300px; padding-top: 20px; margin: 0 auto;">
+        <ejs-maskedtextbox id="mask" width="200px" placeholder="Time (ex: 10:00 PM, 10:00 AM)" mask="00:00 >PM" customCharacters="ViewBag.CustomChars"></ejs-maskedtextbox>
+    </div>

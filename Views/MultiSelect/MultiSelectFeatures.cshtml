@@ -1,0 +1,24 @@
+﻿@using AlphaPilar.Controllers
+@{
+    ViewBag.Title = "MultiSelect";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>MultiSelect Features:</h2>
+<br/>
+<li> MultiSelect Samples - Default</li>
+<li> Theme - Bootstrap-Theme</li>
+<br/>
+             <div id='content'>
+    <div>
+        <h4> Default Mode</h4>
+        <ejs-multiselect id="default" dataSource="@ViewBag.data" placeholder="Favorite Sports" mode="Default"></ejs-multiselect>
+    </div>
+    <div class="control-styles">
+        <h4>Box Mode</h4>
+        <ejs-multiselect id="box" dataSource="@ViewBag.data" placeholder="Favorite Sports" mode="Box"></ejs-multiselect>
+    </div>
+    <div class="control-styles">
+        <h4>Delimiter Mode</h4>
+        <ejs-multiselect id="delimiter" dataSource="@ViewBag.data" placeholder="Favorite Sports" mode="Delimiter"></ejs-multiselect>
+    </div>
+</div>
