@@ -1,0 +1,133 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "File Manager";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <script>
+    function actionComplete(args) {
+
+        if (args.requestType === 'add') {
+            let spinner = ej.popups.createSpinner({ target: args.dialog.element });
+            ej.popups.showSpinner(args.dialog.element);
+
+            if (args.requestType === 'add') {
+                var ajax = new ej.base.Ajax({
+                    url: "@Url.Action("AddFile","APFileManager")", //render the partial view
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ value: args.rowData })
+                });
+                ajax.send().then(function (data) {
+                    appendElement(data, args.form); //Render the edit form with selected record
+                    ej.popups.hideSpinner(args.dialog.element);
+
+
+                }).catch(function (xhr) {
+                    ej.popups.hideSpinner(args.dialog.element);
+                });
+            }
+
+        }
+
+
+        if (args.requestType === 'save') {
+            console.log(args);
+             var filename = args.data.uploadFiles.replace(/^.*[\\\/]/, '');
+             $.post('/APFileManager/FileCreate', {
+                         Section: args.data.Section,
+                         Procedure: args.data.Procedure,
+                         Form : args.data.Form,
+                         Title: args.data.Title,
+                         URL : filename,
+                         Element: args.data.Element,
+                         EksternalUrl: args.data.EksternalUrl,
+                         Work : args.data.Work
+
+                     }).done(function (data) {
+                         if (data.success == false) {
+
+                             $("#Username-info").show();
+                             $("#Username-info").text(data.responseText);
+
+                         } else {
+                             args.data.URL = filename;
+                             grid.dataSource.push(args.data);
+                             args.dialog.close();
+                             grid.refresh();
+                         }
+                     });
+        }
+    }
+
+    function actionBegin(args) {
+        console.log(args.requestType);
+        var grid = this;
+
+    }
+
+function appendElement(elementString, form) {
+    form.querySelector("#dialogTemp").innerHTML = elementString;
+    var script = document.createElement('script');
+    script.type = "text/javascript";
+    var serverScript = form.querySelector("#dialogTemp").querySelector('script');
+    script.textContent = serverScript.innerHTML;
+    document.head.appendChild(script);
+    serverScript.remove();
+ }
+    </script>
+
+<script id='dialogtemplate' type="text/x-template">
+    <div id="dialogTemp">
+    </div>
+</script>
+
+<script id="URLtemplate" type="text/x-template">
+    <a rel='nofollow' target="_blank" href="/uploads/${URL}">
+        ${URL}
+    </a>
+</script>
+
+
+<body>
+    <div>
+        <h1 class="page-title"> File Manager </h1>
+    </div>
+    <div>
+        <div class="col-md-12 margin-top col-lg-12">
+            <ejs-grid id="grid" 
+                      dataSource="ViewBag.datasource" 
+                      actionComplete="actionComplete" 
+                      actionBegin="actionBegin" 
+                      allowExcelExport="true" 
+                      allowFiltering="true" 
+                      allowSorting="true" 
+                      height="300px" 
+                      allowGrouping="true" 
+                      allowPaging="true" 
+                      toolbar="@(new List<string>() {  "Add" })">
+
+                <e-grid-groupsettings columns="@(new string[] {"Section"})"></e-grid-groupsettings>
+
+                <e-grid-editSettings allowAdding="true" mode="Dialog" template='#dialogtemplate'></e-grid-editSettings>
+                <e-grid-filterSettings type="Menu"></e-grid-filterSettings>
+                <e-grid-pagesettings pageCount="5"></e-grid-pagesettings>
+                <e-grid-columns>
+                    <e-grid-column field="Id" headerText="ID" isPrimaryKey="true" type="number" width="75"></e-grid-column>
+                    <e-grid-column field="Section" type="string" headerText="Section" width="150"></e-grid-column>
+                    <e-grid-column field="Procedure" type="string" headerText="Procedure" width="150"></e-grid-column>
+                    <e-grid-column field="Form" type="string" headerText="Number" width="150"></e-grid-column>
+                    <e-grid-column field="Title" type="string" headerText="Title" width="150"></e-grid-column>
+                    <e-grid-column field="Element" type="string" headerText="Element" width="150"></e-grid-column>
+                    <e-grid-column field="URL" type="string" headerText="URL" width="150" template="#URLtemplate"></e-grid-column>
+                    <e-grid-column field="EksternalUrl" type="string" headerText="EksternalUrl" width="150"></e-grid-column>
+                    <e-grid-column field="Work" type="string" headerText="Work" width="150"></e-grid-column>
+                </e-grid-columns>
+
+            </ejs-grid>
+
+            <ejs-scripts></ejs-scripts>
+        </div>
+    </div>
+</body>

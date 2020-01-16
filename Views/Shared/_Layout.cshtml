@@ -23,7 +23,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">AlphaPilar</a>
+        <a class="navbar-brand" href="#">Alfa Pilar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,13 +35,14 @@
                     <a class="nav-link" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
                     <!-- <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
                 </li>
-                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "About" ? "nav-item active" : "nav-item")">
-                    @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link " })
+                <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "FileManager" ? "nav-item active" : "nav-item")">
+
+                    @Html.ActionLink("File Manager", "FileManager", "APFileManager", null, new { @class = "nav-link" })
                 </li>
-                <li class="nav-item">
+                @*<li class="nav-item">
                     <a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a>
 
-                </li>
+                </li>*@
             </ul>
           
         </div>
@@ -50,7 +51,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - AlphaPilar</p>
+            <p>&copy; @DateTime.Now.Year - PT Alfa Pilar Indonesia</p>
         </footer>
     </div>
 

@@ -18,7 +18,6 @@ namespace AlphaPilar.Controllers
             DateTimeValue val = new DateTimeValue();
             val.value = DateTime.Now;
             return View(val);
-            return View();
         }
         [HttpPost]
         public IActionResult DateTimePickerFeatures(DateTimeValue model)

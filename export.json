@@ -1,0 +1,7 @@
+{
+    "_id": 14,
+    "Username": "admin",
+    "Password": {"$binary": "-- 24 bytes --"},
+    "Salt": {"$binary": "-- 24 bytes --"},
+    "RoleName": "Administrator"
+}
