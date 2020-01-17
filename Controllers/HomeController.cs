@@ -17,11 +17,13 @@ using LiteDB;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AlphaPilar.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize(Roles = "Administrator")]
         public IActionResult Index()
         {
             return View();
@@ -36,7 +38,7 @@ namespace AlphaPilar.Controllers
         {
             return View();
         }
-
+        [AllowAnonymous]
         public IActionResult Login(string ReturnUrl)
         {
             string curUrl = HttpContext.Request.QueryString.Value;
@@ -60,7 +62,7 @@ namespace AlphaPilar.Controllers
         }
 
         [HttpPost]
-        public IActionResult DoLogin(string userName, string password, string returnUrl)
+        public IActionResult Login(string userName, string password, string returnUrl)
         {
 
 
@@ -99,7 +101,7 @@ namespace AlphaPilar.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Login", "Home");
+                        return RedirectToAction("Index", "Home");
                     }
                 }
             }

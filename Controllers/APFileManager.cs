@@ -11,11 +11,13 @@ using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
 using System.IO;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AlphaPilar.Controllers
 {
     public class APFileManager : Controller
     {
+        [Authorize(Roles = "Administrator")]
         public IActionResult FileManager()
         {
             using (var db = new LiteDatabase(@"Alfapilar.db"))

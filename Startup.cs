@@ -45,7 +45,7 @@ namespace AlphaPilar
             services.Configure<CookieAuthenticationOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.Cookie.Name = "MineskiCookies";
+                options.Cookie.Name = "AlfaPilarCookies";
                 options.LoginPath = "/Home/Login";
                 options.AccessDeniedPath = "/Home/Login";
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
@@ -81,6 +81,7 @@ namespace AlphaPilar
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

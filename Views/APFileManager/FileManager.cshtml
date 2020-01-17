@@ -6,8 +6,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
     <script>
+        var gridArgs;
+        function onUploadSuccess(uploadArgs) {
+            console.log(this.value);
+        }
     function actionComplete(args) {
-
+        gridArgs = args;
         if (args.requestType === 'add') {
             let spinner = ej.popups.createSpinner({ target: args.dialog.element });
             ej.popups.showSpinner(args.dialog.element);
@@ -30,40 +34,41 @@
             }
 
         }
-
-
-        if (args.requestType === 'save') {
-            console.log(args);
-             var filename = args.data.uploadFiles.replace(/^.*[\\\/]/, '');
-             $.post('/APFileManager/FileCreate', {
-                         Section: args.data.Section,
-                         Procedure: args.data.Procedure,
-                         Form : args.data.Form,
-                         Title: args.data.Title,
-                         URL : filename,
-                         Element: args.data.Element,
-                         EksternalUrl: args.data.EksternalUrl,
-                         Work : args.data.Work
-
-                     }).done(function (data) {
-                         if (data.success == false) {
-
-                             $("#Username-info").show();
-                             $("#Username-info").text(data.responseText);
-
-                         } else {
-                             args.data.URL = filename;
-                             grid.dataSource.push(args.data);
-                             args.dialog.close();
-                             grid.refresh();
-                         }
-                     });
-        }
+     
     }
 
     function actionBegin(args) {
         console.log(args.requestType);
         var grid = this;
+        if (args.requestType === 'save') {
+            if (args.data.URL != null) {
+                var filename = args.data.URL.replace(/^.*[\\\/]/, '');
+                args.data.URL = filename;
+            }
+             
+            $.post('/APFileManager/FileCreate', {
+                Section: args.data.Section,
+                Procedure: args.data.Procedure,
+                Form : args.data.Form,
+                Title: args.data.Title,
+                URL : args.data.URL,
+                Element: args.data.Element,
+                EksternalUrl: args.data.EksternalUrl,
+                Work : args.data.Work
+
+            }).done(function (data) {
+                if (data.success == false) {
+
+                    $("#Username-info").show();
+                    $("#Username-info").text(data.responseText);
+
+                } else {
+                    args.dialog.close();
+                    grid.refresh();
+                }
+            });
+        }
+       
 
     }
 
@@ -89,6 +94,15 @@ function appendElement(elementString, form) {
     </a>
 </script>
 
+<script id="EkternalTemplate" type="text/x-template">
+    ${if(EksternalUrl != null)}
+    <a rel='nofollow' target="_blank" href="//${EksternalUrl}">
+        ${EksternalUrl}
+    </a>
+    ${/if}
+
+</script>
+
 
 <body>
     <div>
@@ -106,6 +120,7 @@ function appendElement(elementString, form) {
                       height="300px" 
                       allowGrouping="true" 
                       allowPaging="true" 
+                      
                       toolbar="@(new List<string>() {  "Add" })">
 
                 <e-grid-groupsettings columns="@(new string[] {"Section"})"></e-grid-groupsettings>
@@ -114,14 +129,13 @@ function appendElement(elementString, form) {
                 <e-grid-filterSettings type="Menu"></e-grid-filterSettings>
                 <e-grid-pagesettings pageCount="5"></e-grid-pagesettings>
                 <e-grid-columns>
-                    <e-grid-column field="Id" headerText="ID" isPrimaryKey="true" type="number" width="75"></e-grid-column>
                     <e-grid-column field="Section" type="string" headerText="Section" width="150"></e-grid-column>
                     <e-grid-column field="Procedure" type="string" headerText="Procedure" width="150"></e-grid-column>
                     <e-grid-column field="Form" type="string" headerText="Number" width="150"></e-grid-column>
                     <e-grid-column field="Title" type="string" headerText="Title" width="150"></e-grid-column>
                     <e-grid-column field="Element" type="string" headerText="Element" width="150"></e-grid-column>
-                    <e-grid-column field="URL" type="string" headerText="URL" width="150" template="#URLtemplate"></e-grid-column>
-                    <e-grid-column field="EksternalUrl" type="string" headerText="EksternalUrl" width="150"></e-grid-column>
+                    <e-grid-column field="URL" type="string" headerText="URL" template="#URLtemplate"  width="150" ></e-grid-column>
+                    <e-grid-column field="EksternalUrl" type="string" headerText="EksternalUrl" template="#EkternalTemplate" width="150"></e-grid-column>
                     <e-grid-column field="Work" type="string" headerText="Work" width="150"></e-grid-column>
                 </e-grid-columns>
 
