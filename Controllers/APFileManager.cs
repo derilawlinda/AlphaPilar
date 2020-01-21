@@ -78,6 +78,75 @@ namespace AlphaPilar.Controllers
             return PartialView("_AddFile");
         }
 
+        [HttpPost]
+        public IActionResult ShowFileEditorForm([FromBody] CRUDModel<FileManagerModel> value)
+        {
+            FileManagerModel result;
+            using (var db = new LiteDatabase(@"Alfapilar.db"))
+            {
+                var query = db.GetCollection<FileManagerModel>("fileManagers");
+                result = query.FindById(value.Value.Id);
+                ViewBag.datasource = result;
+            }
+            return PartialView("_EditFile", result);
+        }
+
+        [HttpPost]
+       
+        public JsonResult FileUpdate(Int32 Id, string Section, string Procedure, string Form, string Title, string URL, string Element, string EksternalUrl, string Work)
+        {
+
+            try
+            {
+                using (var db = new LiteDatabase(@"Alfapilar.db"))
+                {
+
+
+
+                    var collection = db.GetCollection<FileManagerModel>("fileManagers");
+                    var fileUpdate = collection.FindById(Id);
+                    fileUpdate.Section = Section;
+                    fileUpdate.Procedure = Procedure;
+                    fileUpdate.Form = Form;
+                    fileUpdate.Title = Title;
+                    fileUpdate.Element = Element;
+                    fileUpdate.URL = URL;
+                    fileUpdate.EksternalUrl = EksternalUrl;
+                    fileUpdate.Work = Work;
+                    collection.Update(fileUpdate);
+
+                }
+            }
+            catch (Exception exception)
+            {
+                return Json(new { success = false, responseText = exception.Message });
+            }
+
+            return Json(new { success = true });
+        }
+
+        [HttpPost]
+        public IActionResult FileDelete(Int32 id)
+        {
+            try
+            {
+
+                using (var db = new LiteDatabase(@"Alfapilar.db"))
+                {
+                    // Get customer collection
+                    var collection = db.GetCollection<FileManagerModel>("fileManagers");
+                    collection.Delete(id);
+
+                }
+            }
+            catch (Exception exception)
+            {
+                return Json(new { success = false, responseText = exception.Message });
+            }
+
+            return Json(new { success = true });
+        }
+
         private IHostingEnvironment hostingEnv;
         public void Save(IList<IFormFile> chunkFile, IList<IFormFile> UploadFiles)
         {

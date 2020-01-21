@@ -11,7 +11,25 @@
             console.log(this.value);
         }
     function actionComplete(args) {
-        gridArgs = args;
+        if (args.requestType === "beginEdit") {
+            document.getElementById("grid_dialogEdit_wrapper_title").innerHTML = "Detail for " + args.rowData.Title;
+            let spinner = ej.popups.createSpinner({ target: args.dialog.element });
+            ej.popups.showSpinner(args.dialog.element);
+            var ajax = new ej.base.Ajax({
+                    url: "@Url.Action("ShowFileEditorForm","APFileManager")", //render the partial view
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ value: args.rowData })
+                });
+                ajax.send().then(function (data) {
+                    appendElement(data, args.form); //Render the edit form with selected record
+                    ej.popups.hideSpinner(args.dialog.element);
+                }).catch(function (xhr) {
+                    ej.popups.hideSpinner(args.dialog.element);
+                });
+
+
+        }
         if (args.requestType === 'add') {
             let spinner = ej.popups.createSpinner({ target: args.dialog.element });
             ej.popups.showSpinner(args.dialog.element);
@@ -34,40 +52,91 @@
             }
 
         }
+
+        if (args.requestType === 'save') {
+            if (args.data.isNew == "false") {
+                if (args.data.URL == null) {
+                    args.data.URL = args.previousData.URL;
+                   
+                }
+                $.post('/APFileManager/FileUpdate', {
+                    Id : args.data.Id,
+                    Section: args.data.Section,
+                    Procedure: args.data.Procedure,
+                    Form: args.data.Form,
+                    Title: args.data.Title,
+                    URL: args.data.URL,
+                    Element: args.data.Element,
+                    EksternalUrl: args.data.EksternalUrl,
+                    Work: args.data.Work
+
+                }).done(function (data) {
+                    if (data.success == false) {
+
+                        $("#Username-info").show();
+                        $("#Username-info").text(data.responseText);
+
+                    } else {
+                        args.dialog.close();
+                    }
+                });
+
+            }
+        }
+
+        if (args.requestType == "delete") {
+            $.post('/APFileManager/FileDelete', {
+                id: args.data[0].Id
+            }).done(function (data) {
+
+            });
+        };
      
     }
 
     function actionBegin(args) {
-        console.log(args.requestType);
+       
         var grid = this;
         if (args.requestType === 'save') {
-            if (args.data.URL != null) {
-                var filename = args.data.URL.replace(/^.*[\\\/]/, '');
-                args.data.URL = filename;
-            }
-             
-            $.post('/APFileManager/FileCreate', {
-                Section: args.data.Section,
-                Procedure: args.data.Procedure,
-                Form : args.data.Form,
-                Title: args.data.Title,
-                URL : args.data.URL,
-                Element: args.data.Element,
-                EksternalUrl: args.data.EksternalUrl,
-                Work : args.data.Work
-
-            }).done(function (data) {
-                if (data.success == false) {
-
-                    $("#Username-info").show();
-                    $("#Username-info").text(data.responseText);
-
-                } else {
-                    args.dialog.close();
-                    grid.refresh();
+           
+            if (args.data.isNew == "true") {
+                if (args.data.URL != null) {
+                    var filename = args.data.URL.replace(/^.*[\\\/]/, '');
+                    args.data.URL = filename;
                 }
-            });
+                $.post('/APFileManager/FileCreate', {
+                    Section: args.data.Section,
+                    Procedure: args.data.Procedure,
+                    Form: args.data.Form,
+                    Title: args.data.Title,
+                    URL: args.data.URL,
+                    Element: args.data.Element,
+                    EksternalUrl: args.data.EksternalUrl,
+                    Work: args.data.Work
+
+                }).done(function (data) {
+                    if (data.success == false) {
+
+                        $("#Username-info").show();
+                        $("#Username-info").text(data.responseText);
+
+                    } else {
+                        args.dialog.close();
+                        grid.refresh();
+                    }
+                });
+
+            } else {
+                if (args.data.URL == null) {
+                    args.data.URL = args.previousData.URL;                   
+                } else {
+                     var filename = args.data.URL.replace(/^.*[\\\/]/, '');
+                    args.data.URL = filename;
+                }
+            }
+            
         }
+
        
 
     }
@@ -89,9 +158,11 @@ function appendElement(elementString, form) {
 </script>
 
 <script id="URLtemplate" type="text/x-template">
+    ${if(URL != null)}
     <a rel='nofollow' target="_blank" href="/uploads/${URL}">
         ${URL}
     </a>
+    ${/if}
 </script>
 
 <script id="EkternalTemplate" type="text/x-template">
@@ -121,11 +192,11 @@ function appendElement(elementString, form) {
                       allowGrouping="true" 
                       allowPaging="true" 
                       
-                      toolbar="@(new List<string>() {  "Add" })">
+                      toolbar="@(new List<string>() {"Add", "Edit", "Delete"})">
 
                 <e-grid-groupsettings columns="@(new string[] {"Section"})"></e-grid-groupsettings>
 
-                <e-grid-editSettings allowAdding="true" mode="Dialog" template='#dialogtemplate'></e-grid-editSettings>
+                <e-grid-editSettings allowDeleting="true" allowAdding="true" allowEditing="true" mode="Dialog" template='#dialogtemplate'></e-grid-editSettings>
                 <e-grid-filterSettings type="Menu"></e-grid-filterSettings>
                 <e-grid-pagesettings pageCount="5"></e-grid-pagesettings>
                 <e-grid-columns>

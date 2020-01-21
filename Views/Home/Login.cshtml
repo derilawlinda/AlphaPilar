@@ -3,23 +3,26 @@
     Layout = null;
 }
 
-    <link href="@Url.Content("~/css/login.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/css/login.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/css/util.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
 
-    <script src="~/js/jquery-3.2.1.min.js"></script>
-    <script src="~/js/bootstrap.min.js"></script>
-    <script src="~/js/jquery.marquee.min.js"></script>
-    <script src="~/js/main_login.js"></script>
 
-    <script>
-        $(window).on('load', function () {
-            /*------------------
-                Preloder
-            --------------------*/
-            $(".loader").fadeOut();
-            $("#preloder").delay(400).fadeOut("slow");
+<script src="~/js/jquery-3.2.1.min.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/jquery.marquee.min.js"></script>
+<script src="~/js/main_login.js"></script>
 
-        });
-    </script>
+<script>
+    $(window).on('load', function () {
+        /*------------------
+            Preloder
+        --------------------*/
+        $(".loader").fadeOut();
+        $("#preloder").delay(400).fadeOut("slow");
+
+    });
+</script>
 
 <body>
     <div class="limiter">
@@ -30,28 +33,28 @@
                     <div class="img-container" style="text-align:center">
                         <img src="~/images/alfapilar.png" />
                     </div>
-                    
-                        @if (ViewBag.error == "InvalidUsername")
-                        {
-                            <span class="invalid-class float-right">Invalid username or password</span>
-                        }
-                        <br />
-                        <input type="text" hidden="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
-                        <div class="wrap-input100 validate-input m-t-1 m-b-35" data-validate="Invalid username">
-                            <input class="input100" type="text" name="userName">
-                            <span class="focus-input100" data-placeholder="Username"></span>
-                        </div>
 
-                        <div class="wrap-input100 validate-input m-b-50" data-validate="Invalid password">
-                            <input class="input100" type="password" name="password">
-                            <span class="focus-input100" data-placeholder="Password"></span>
-                        </div>
+                    @if (ViewBag.error == "InvalidUsername")
+                    {
+                        <span class="invalid-class float-right">Invalid username or password</span>
+                    }
+                    <br />
+                    <input type="text" hidden="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+                    <div class="wrap-input100 validate-input m-t-1 m-b-35" data-validate="Invalid username">
+                        <input class="input100" type="text" name="userName">
+                        <span class="focus-input100" data-placeholder="Username"></span>
+                    </div>
 
-                        <div class="container-login100-form-btn" style="margin-top:20px">
-                            <button asp-controller="Home" asp-action="Login" class="login100-form-btn">
-                                Login
-                            </button>
-                        </div>
+                    <div class="wrap-input100 validate-input m-b-50" data-validate="Invalid password">
+                        <input class="input100" type="password" name="password">
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                    </div>
+
+                    <div class="container-login100-form-btn" style="margin-top:20px">
+                        <button asp-controller="Home" asp-action="Login" class="login100-form-btn">
+                            Login
+                        </button>
+                    </div>
                 </form>
 
 
