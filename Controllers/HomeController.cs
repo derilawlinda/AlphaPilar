@@ -44,7 +44,7 @@ namespace AlphaPilar.Controllers
             string curUrl = HttpContext.Request.QueryString.Value;
             string url = System.Net.WebUtility.UrlDecode(curUrl);
 
-            var index = url.IndexOf('?', url.IndexOf('?') + 1);
+            var index = url.IndexOf('?');
 
             if (index > -1)
             {
@@ -54,6 +54,7 @@ namespace AlphaPilar.Controllers
                 {
                     var error = parsed["error"].ToString();
                     ViewBag.error = error;
+                    Console.Write(error);
                 }
             }
             ViewBag.returnUrl = ReturnUrl;

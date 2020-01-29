@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /**
  * ej2 styles
  */
@@ -5210,16 +5210,16 @@ label.e-float-text,
   border-bottom-color: #f44336;
 }
 
-.e-float-input:not(.e-input-group) .e-float-line::before,
-.e-float-input:not(.e-input-group) .e-float-line::after,
-.e-float-input:not(.e-input-group) .e-float-line::before,
-.e-float-input:not(.e-input-group) .e-float-line::after,
-.e-float-input.e-control-wrapper:not(.e-input-group) .e-float-line::before,
-.e-float-input.e-control-wrapper:not(.e-input-group) .e-float-line::after,
-.e-float-input.e-control-wrapper:not(.e-input-group) .e-float-line::before,
-.e-float-input.e-control-wrapper:not(.e-input-group) .e-float-line::after {
-  background: #e3165b;
-}
+    .e-float-input:not(.e-input-group) .e-float-line::before,
+    .e-float-input:not(.e-input-group) .e-float-line::after,
+    .e-float-input:not(.e-input-group) .e-float-line::before,
+    .e-float-input:not(.e-input-group) .e-float-line::after,
+    .e-float-input.e-control-wrapper:not(.e-input-group) .e-float-line::before,
+    .e-float-input.e-control-wrapper:not(.e-input-group) .e-float-line::after,
+    .e-float-input.e-control-wrapper:not(.e-input-group) .e-float-line::before,
+    .e-float-input.e-control-wrapper:not(.e-input-group) .e-float-line::after {
+        background: #2f318b;
+    }
 
 .e-float-input.e-success:not(.e-input-group) .e-float-line::before,
 .e-float-input.e-success:not(.e-input-group) .e-float-line::after,
@@ -5266,25 +5266,25 @@ label.e-float-text,
   color: rgba(0, 0, 0, 0.54);
 }
 
-input.e-input::selection,
-textarea.e-input::selection,
-.e-input-group input.e-input::selection,
-.e-input-group.e-control-wrapper input.e-input::selection,
-.e-float-input input::selection,
-.e-float-input.e-control-wrapper input::selection,
-.e-input-group textarea.e-input::selection,
-.e-input-group.e-control-wrapper textarea.e-input::selection,
-.e-float-input textarea::selection,
-.e-float-input.e-control-wrapper textarea::selection {
-  background: #e3165b;
-  color: #fff;
-}
+    input.e-input::selection,
+    textarea.e-input::selection,
+    .e-input-group input.e-input::selection,
+    .e-input-group.e-control-wrapper input.e-input::selection,
+    .e-float-input input::selection,
+    .e-float-input.e-control-wrapper input::selection,
+    .e-input-group textarea.e-input::selection,
+    .e-input-group.e-control-wrapper textarea.e-input::selection,
+    .e-float-input textarea::selection,
+    .e-float-input.e-control-wrapper textarea::selection {
+        background: #2f318b;
+        color: #fff;
+    }
 
-.e-float-input.e-small textarea::selection,
-.e-float-input textarea::selection {
-  background: #e3165b;
-  color: #fff;
-}
+    .e-float-input.e-small textarea::selection,
+    .e-float-input textarea::selection {
+        background: #2f318b;
+        color: #fff;
+    }
 
 input.e-input:-moz-placeholder {
   color: rgba(0, 0, 0, 0.42);
@@ -5403,7 +5403,7 @@ textarea.e-input::-webkit-input-placeholder {
 .e-input-group.e-control-wrapper:not(.e-float-icon-left):not(.e-float-input)::after,
 .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::before,
 .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::after {
-  background: #e3165b;
+    background: #2f318b;
 }
 
 .e-float-input.e-input-group:not(.e-float-icon-left) .e-float-line::before,
@@ -5414,7 +5414,7 @@ textarea.e-input::-webkit-input-placeholder {
 .e-float-input.e-control-wrapper.e-input-group:not(.e-float-icon-left) .e-float-line::after,
 .e-float-input.e-control-wrapper.e-input-group.e-float-icon-left .e-input-in-wrap .e-float-line::before,
 .e-float-input.e-control-wrapper.e-input-group.e-float-icon-left .e-input-in-wrap .e-float-line::after {
-  background: #e3165b;
+    background: #2f318b;
 }
 
 .e-input-group:not(.e-float-icon-left):not(.e-float-input).e-success::before,
@@ -5974,7 +5974,7 @@ textarea.e-input::-webkit-input-placeholder {
 .e-small .e-float-input.e-control-wrapper:not(.e-error) textarea:focus ~ label.e-float-text,
 .e-float-input.e-control-wrapper.e-small.e-bigger:not(.e-error) textarea:focus ~ label.e-float-text,
 .e-bigger .e-float-input.e-control-wrapper.e-small:not(.e-error) textarea:focus ~ label.e-float-text {
-  color: #e3165b;
+    color: #2f318b;
 }
 
 .e-input-group:hover:not(.e-success):not(.e-warning):not(.e-error):not(.e-disabled):not(.e-float-icon-left),
@@ -6345,11 +6345,11 @@ textarea.e-input::-webkit-input-placeholder {
 }
 
 .e-slider-tooltip.e-tooltip-wrap.e-popup {
-  background-color: #e3165b;
-  border: 0;
-  border-radius: 8px;
-  cursor: grab;
-  opacity: 1;
+    background-color: #2f318b;
+    border: 0;
+    border-radius: 8px;
+    cursor: grab;
+    opacity: 1;
 }
 
 .e-slider-tooltip.e-tooltip-wrap.e-popup.e-popup.e-popup-close {

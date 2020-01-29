@@ -27,7 +27,7 @@ namespace AlphaPilar
 
             var hostUrl = configuration["hosturl"];
             if (string.IsNullOrEmpty(hostUrl))
-                hostUrl = "http://*:80";
+                hostUrl = "https://*:443";
 
             CreateWebHostBuilder(args)
                 .UseKestrel()
