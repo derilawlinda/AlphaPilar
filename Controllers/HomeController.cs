@@ -50,12 +50,15 @@ namespace AlphaPilar.Controllers
             {
                 var ouput = string.Concat(url.Substring(0, index), "&", url.Substring(index + 1));
                 var parsed = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(ouput);
-                if (parsed["error"] != "")
+                if (parsed.ContainsKey("error"))
                 {
-                    var error = parsed["error"].ToString();
-                    ViewBag.error = error;
-                    Console.Write(error);
+                    if (parsed["error"] != "")
+                    {
+                        var error = parsed["error"].ToString();
+                        ViewBag.error = error;
+                    }
                 }
+               
             }
             ViewBag.returnUrl = ReturnUrl;
             return View();
