@@ -108,10 +108,16 @@ namespace AlphaPilar.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                 }
+                else
+                {
+                    return RedirectToAction("Login", "Home", new
+                    {
+                        error = "InvalidUsername"
+                    });
+                }
             }
 
 
-            return View();
         }
 
         [HttpPost]
