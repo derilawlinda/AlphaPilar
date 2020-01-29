@@ -25,7 +25,8 @@
         <script>
             function togglePassword() {
                 var x = document.getElementById("password");
-                var eye =  document.getElementById("eye");
+                var eye = document.getElementById("eye");
+                console.log(x);
                   if (x.type === "password") {
                       x.type = "text";
                       eye.classList.add("alfapilar-blue");
@@ -36,6 +37,7 @@
 
                   }
             }
+        
         </script>
 
         <style>
@@ -77,6 +79,7 @@
                     <div class="row d-flex align-items-center justify-content-center">
                         <div class="col-xs-4 col-sm-6 col-lg-4 col-md-4">
                             <ejs-textbox id="username" placeholder="Username" floatLabelType="Auto"></ejs-textbox>
+                            
                         </div>
                     </div>
                     <div class="row d-flex align-items-center justify-content-center">
@@ -84,7 +87,7 @@
                             <div class="e-float-input e-control-wrapper e-input-group">
                                 <input id="password" class="e-control e-textbox e-lib" type="password" name="password" aria-labelledby="label_password">
                                 <span class="e-float-line"></span>
-                                <label class="e-float-text e-label-bottom" id="label_password" for="password">Password</label>
+                                <label class="e-float-text e-label-m" id="label_password" for="password">Password</label>
                                 <span onclick="togglePassword()" class="e-input-group-icon"><i id="eye" class="material-icons">remove_red_eye</i></span>
                             </div>
                         </div>
@@ -127,6 +130,56 @@
             <ejs-scripts></ejs-scripts>
 </body>
 
+<script type="text/javascript">
+    ej.base.enableRipple(true);
+        var inputObject = {};
+        var input = document.querySelectorAll('#password');
+        var inputIcon = document.querySelectorAll('.e-input-group-icon');
+        var focusFn = function (index) {
+            return function () {
+                getParentNode(input[index]).classList.add('e-input-focus');
+            };
+        };
+        var blurFn = function (index) {
+            return function () {
+                getParentNode(input[index]).classList.remove('e-input-focus');
+                if (input[0].value == "") {
+                    document.getElementById("label_password").classList.remove("e-label-m");
+                    document.getElementById("label_password").classList.add("e-label-bottom");
+                    document.getElementById("label_password").classList.remove("e-label-top");
+
+                } else {
+                    document.getElementById("label_password").classList.remove("e-label-m");
+                     document.getElementById("label_password").classList.add("e-label-top");
+                    document.getElementById("label_password").classList.remove("e-label-bottom");
+                    
+                }
+               
+            };
+        };
+        var mouseupFn = function () {
+            var ele = this; setTimeout(function () {
+                ele.classList.remove('e-input-btn-ripple');
+            }, 500);
+        };
+        for (var i = 0; i < input.length; i++) {
+            input[i].addEventListener('focus', focusFn(i));
+            input[i].addEventListener('blur', blurFn(i));
+        }
+        for (var j = 0; j < inputIcon.length; j++) {
+            inputIcon[j].addEventListener('mousedown', function () {
+                this.classList.add('e-input-btn-ripple');
+            });
+            inputIcon[j].addEventListener('mouseup', mouseupFn);
+        }
+        function getParentNode(element) {
+            var parentNode = element.parentNode;
+            if (parentNode.classList.contains('e-input-in-wrap')) {
+                return parentNode.parentNode;
+            }
+            return parentNode;
+        }
+</script>
 
 
 
