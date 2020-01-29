@@ -135,6 +135,8 @@
         var inputObject = {};
         var input = document.querySelectorAll('#password');
         var inputIcon = document.querySelectorAll('.e-input-group-icon');
+        document.getElementById("label_password").classList.add("e-label-bottom");
+
         var focusFn = function (index) {
             return function () {
                 getParentNode(input[index]).classList.add('e-input-focus');
