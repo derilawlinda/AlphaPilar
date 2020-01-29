@@ -19,9 +19,31 @@
             <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         </environment>
         <link rel="stylesheet" href="~/css/ej2/material.css" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
         <script src="~/js/ej2/ej2.min.js"></script>
-        
+        <script>
+            function togglePassword() {
+                var x = document.getElementById("password");
+                var eye =  document.getElementById("eye");
+                  if (x.type === "password") {
+                      x.type = "text";
+                      eye.classList.add("alfapilar-blue");
+                     
+                  } else {
+                      x.type = "password";
+                       eye.classList.remove("alfapilar-blue");
+
+                  }
+            }
+        </script>
+
+        <style>
+            .alfapilar-blue{
+                color: #2f318b;
+            }
+        </style>
+
 
     </head>
     <body>
@@ -59,7 +81,12 @@
                     </div>
                     <div class="row d-flex align-items-center justify-content-center">
                         <div class="col-xs-4 col-sm-6 col-lg-4 col-md-4">
-                            <ejs-textbox id="password" placeholder="Password" floatLabelType="Auto" type="password"></ejs-textbox>
+                            <div class="e-float-input e-control-wrapper e-input-group">
+                                <input id="password" class="e-control e-textbox e-lib" type="password" name="password" aria-labelledby="label_password">
+                                <span class="e-float-line"></span>
+                                <label class="e-float-text e-label-bottom" id="label_password" for="password">Password</label>
+                                <span onclick="togglePassword()" class="e-input-group-icon"><i id="eye" class="material-icons">remove_red_eye</i></span>
+                            </div>
                         </div>
                     </div>
 
