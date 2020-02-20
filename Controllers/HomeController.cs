@@ -23,6 +23,8 @@ namespace AlphaPilar.Controllers
 {
     public class HomeController : Controller
     {
+        DBOptions dbOptions;
+
         [Authorize(Roles = "Administrator")]
         public IActionResult Index()
         {
@@ -69,17 +71,16 @@ namespace AlphaPilar.Controllers
         public IActionResult Login(string userName, string password, string returnUrl)
         {
 
-
             if (!string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(password))
             {
                 return RedirectToAction("Login");
             }
             //Check the user name and password  
             //Here can be implemented checking logic from the database  
-            var db = new LiteDatabase(@"Alfapilar.db");
+            var db = new LiteDatabase(@"filename=Alfapilar.db");
             var query = db.GetCollection<Account>("accounts");
             Account result = query.Find(Query.EQ("Username", userName)).FirstOrDefault();
-
+            
             if (result == null)
             {
                 return RedirectToAction("Login", "Home", new
@@ -115,7 +116,10 @@ namespace AlphaPilar.Controllers
                         error = "InvalidUsername"
                     });
                 }
+
             }
+
+            
 
 
         }

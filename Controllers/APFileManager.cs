@@ -17,10 +17,13 @@ namespace AlphaPilar.Controllers
 {
     public class APFileManager : Controller
     {
+        DBOptions dbOptions;
+
         [Authorize(Roles = "Administrator")]
         public IActionResult FileManager()
         {
-            using (var db = new LiteDatabase(@"Alfapilar.db"))
+
+            using (var db = new LiteDatabase(dbOptions.connectionString))
             {
                 var query = db.GetCollection<FileManagerModel>("fileManagers");
                 var results = query.FindAll();
@@ -36,7 +39,7 @@ namespace AlphaPilar.Controllers
             try
             {
 
-                using (var db = new LiteDatabase(@"Alfapilar.db"))
+                using (var db = new LiteDatabase(dbOptions.connectionString))
                 {
                     // Get customer collection
                     var files = db.GetCollection<FileManagerModel>("fileManagers");
@@ -69,11 +72,11 @@ namespace AlphaPilar.Controllers
 
         public IActionResult AddFile([FromBody] CRUDModel<FileManagerModel> value)
         {
-            using (var db = new LiteDatabase(@"Alfapilar.db"))
+            using (var db = new LiteDatabase(dbOptions.connectionString))
             {
                 var query = db.GetCollection<FileManagerModel>("fileManagers");
                 var maxId = query.Max(x => x.Id);
-                ViewBag.maxId = maxId.AsInt32 + 1;
+                ViewBag.maxId = maxId + 1;
             }
             return PartialView("_AddFile");
         }
@@ -82,7 +85,7 @@ namespace AlphaPilar.Controllers
         public IActionResult ShowFileEditorForm([FromBody] CRUDModel<FileManagerModel> value)
         {
             FileManagerModel result;
-            using (var db = new LiteDatabase(@"Alfapilar.db"))
+            using (var db = new LiteDatabase(dbOptions.connectionString))
             {
                 var query = db.GetCollection<FileManagerModel>("fileManagers");
                 result = query.FindById(value.Value.Id);
@@ -98,7 +101,7 @@ namespace AlphaPilar.Controllers
 
             try
             {
-                using (var db = new LiteDatabase(@"Alfapilar.db"))
+                using (var db = new LiteDatabase(dbOptions.connectionString))
                 {
 
 
@@ -147,7 +150,7 @@ namespace AlphaPilar.Controllers
             return Json(new { success = true });
         }
 
-        private IHostingEnvironment hostingEnv;
+        private IWebHostEnvironment hostingEnv;
         public void Save(IList<IFormFile> chunkFile, IList<IFormFile> UploadFiles)
         {
             long size = 0;

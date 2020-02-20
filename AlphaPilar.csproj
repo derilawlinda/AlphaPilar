@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <TypeScriptLib>dom,es2015</TypeScriptLib>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="LiteDB" Version="4.1.4" />
+    <PackageReference Include="LiteDB" Version="5.0.2" />
     <PackageReference Include="McMaster.AspNetCore.LetsEncrypt" Version="0.2.0" />
     <PackageReference Include="Syncfusion.EJ2.PdfViewer.AspNet.Core.Windows" Version="17.1.0.47" />
     <PackageReference Include="Syncfusion.Compression.Net.Core" Version="17.1.0.47" />
@@ -16,7 +16,10 @@
     <PackageReference Include="Syncfusion.Pdf.Net.Core" Version="17.1.0.47" />
     <PackageReference Include="Syncfusion.EJ2.WordEditor.AspNet.Core" Version="17.1.0.47" />
     <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="17.1.0.47" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.App">
+      <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
+      <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 </Project>
